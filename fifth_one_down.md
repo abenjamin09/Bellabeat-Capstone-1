@@ -179,37 +179,17 @@ heartrate_seconds_merged, and hourlyIntensities data sets.
 sleep_data <- read.csv("/cloud/project/capstone project/R Projects/sleepDay_merged.csv")
 ```
 
-    ## Warning in file(file, "rt"): cannot open file '/cloud/project/capstone project/R
-    ## Projects/sleepDay_merged.csv': No such file or directory
-
-    ## Error in file(file, "rt"): cannot open the connection
-
 ``` r
 weightLog_data <- read.csv("/cloud/project/capstone project/R Projects/weightLogInfo_merged.csv")
 ```
-
-    ## Warning in file(file, "rt"): cannot open file '/cloud/project/capstone project/R
-    ## Projects/weightLogInfo_merged.csv': No such file or directory
-
-    ## Error in file(file, "rt"): cannot open the connection
 
 ``` r
 heartrate_data <- read.csv("/cloud/project/capstone project/R Projects/heartrate_seconds_merged.csv")
 ```
 
-    ## Warning in file(file, "rt"): cannot open file '/cloud/project/capstone project/R
-    ## Projects/heartrate_seconds_merged.csv': No such file or directory
-
-    ## Error in file(file, "rt"): cannot open the connection
-
 ``` r
-hourlyIntensities_data <- read.csv("/cloud/project/capstone project/R Projects/hourlyIntensities_merged2.csv")
+hourlyIntensities_data <- read.csv("/cloud/project/capstone project/R Projects/hourlyIntensities_merged.csv")
 ```
-
-    ## Warning in file(file, "rt"): cannot open file '/cloud/project/capstone project/R
-    ## Projects/hourlyIntensities_merged2.csv': No such file or directory
-
-    ## Error in file(file, "rt"): cannot open the connection
 
 ##### View datasets
 
@@ -219,25 +199,56 @@ Next, I viewed the head of these data sets
 glimpse(sleep_data)
 ```
 
-    ## Error in glimpse(sleep_data): object 'sleep_data' not found
+    ## Rows: 419
+    ## Columns: 10
+    ## $ Id                 <dbl> 1503960366, 1503960366, 1503960366, 1503960366, 150…
+    ## $ SleepDay           <chr> "Tuesday, April 12, 2016", "Wednesday, April 13, 20…
+    ## $ TotalSleepRecords  <int> 1, 2, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, …
+    ## $ TotalMinutesAsleep <dbl> 327, 384, 412, 340, 700, 304, 360, 325, 361, 430, 2…
+    ## $ TotalTimeInBed     <dbl> 346, 407, 442, 367, 712, 320, 377, 364, 384, 449, 3…
+    ## $ Total.hours.asleep <int> 5, 6, 7, 6, 12, 5, 6, 5, 6, 7, 5, 4, 6, 6, 7, 6, 5,…
+    ## $ Total.hours.in.bed <int> 6, 7, 7, 6, 12, 5, 6, 6, 6, 7, 5, 5, 7, 6, 7, 7, 5,…
+    ## $ subtraction        <int> 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, …
+    ## $ differenceminutes  <int> 19, 23, 30, 27, 12, 16, 17, 39, 23, 19, 46, 29, 27,…
+    ## $ X                  <chr> "", "", "", "", "", "", "", "", "", "", "", "", "",…
 
 ``` r
 glimpse(weightLog_data)
 ```
 
-    ## Error in glimpse(weightLog_data): object 'weightLog_data' not found
+    ## Rows: 67
+    ## Columns: 8
+    ## $ Id             <dbl> 1503960366, 1503960366, 1927972279, 2873212765, 2873212…
+    ## $ Date           <chr> "5/2/2016 23:59", "5/3/2016 23:59", "4/13/2016 1:08", "…
+    ## $ WeightKg       <dbl> 52.6, 52.6, 133.5, 56.7, 57.3, 72.4, 72.3, 69.7, 70.3, …
+    ## $ WeightPounds   <dbl> 115.9631, 115.9631, 294.3171, 125.0021, 126.3249, 159.6…
+    ## $ Fat            <int> 22, NA, NA, NA, NA, 25, NA, NA, NA, NA, NA, NA, NA, NA,…
+    ## $ BMI            <dbl> 22.65, 22.65, 47.54, 21.45, 21.69, 27.45, 27.38, 27.25,…
+    ## $ IsManualReport <lgl> TRUE, TRUE, FALSE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, …
+    ## $ LogId          <dbl> 1.46e+12, 1.46e+12, 1.46e+12, 1.46e+12, 1.46e+12, 1.46e…
 
 ``` r
 glimpse(heartrate_data)
 ```
 
-    ## Error in glimpse(heartrate_data): object 'heartrate_data' not found
+    ## Rows: 1,048,575
+    ## Columns: 5
+    ## $ Id    <dbl> 2022484408, 2022484408, 2022484408, 2022484408, 2022484408, 2022…
+    ## $ Time  <chr> "7:21 AM", "7:21 AM", "7:21 AM", "7:21 AM", "7:21 AM", "7:22 AM"…
+    ## $ Value <int> 97, 102, 105, 103, 101, 95, 91, 93, 94, 93, 92, 89, 83, 61, 60, …
+    ## $ X     <lgl> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …
+    ## $ X25   <lgl> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …
 
 ``` r
 glimpse(hourlyIntensities_data)
 ```
 
-    ## Error in glimpse(hourlyIntensities_data): object 'hourlyIntensities_data' not found
+    ## Rows: 22,099
+    ## Columns: 4
+    ## $ Id               <dbl> 1503960366, 1503960366, 1503960366, 1503960366, 15039…
+    ## $ ActivityHour     <chr> "4/12/2016 12:00:00 AM", "4/12/2016 1:00:00 AM", "4/1…
+    ## $ TotalIntensity   <int> 20, 8, 7, 0, 0, 0, 0, 0, 13, 30, 29, 12, 11, 6, 36, 5…
+    ## $ AverageIntensity <dbl> 0.333333, 0.133333, 0.116667, 0.000000, 0.000000, 0.0…
 
 ##### Check for structural errors
 
@@ -249,8 +260,6 @@ values to the correct format. Beginning with weightLog_data.
 weightLog_data[['Date']] <- as.POSIXct(strptime(weightLog_data[['Date']], "%m/%d/%Y %H:%M"), format = "%Y/%m/%d %I:%M %p")
 ```
 
-    ## Error in strptime(weightLog_data[["Date"]], "%m/%d/%Y %H:%M"): object 'weightLog_data' not found
-
 I will then repeat these steps for sleep_data, heartrate, and
 hourly_intensities
 
@@ -258,19 +267,13 @@ hourly_intensities
 sleep_data[["SleepDay"]] <- as.POSIXct(strptime(sleep_data[["SleepDay"]], "%m/%d/%Y %H:%M:%S %p"), format = "%Y/%m/%d %I:%M:%S %p")
 ```
 
-    ## Error in strptime(sleep_data[["SleepDay"]], "%m/%d/%Y %H:%M:%S %p"): object 'sleep_data' not found
-
 ``` r
 heartrate_data[["Time"]] <- as.POSIXct(strptime(heartrate_data[["Time"]],format="%m/%d/%Y %H:%M:%S %p"), format = "%Y/%m/%d %H:%M:%S %p")
 ```
 
-    ## Error in strptime(heartrate_data[["Time"]], format = "%m/%d/%Y %H:%M:%S %p"): object 'heartrate_data' not found
-
 ``` r
 hourlyIntensities_data[["ActivityHour"]] <-  as.POSIXct(strptime(hourlyIntensities_data[["ActivityHour"]],format="%m/%d/%Y %H:%M:%S %p"), format = "%Y/%m/%d %H:%M:%S %p")
 ```
-
-    ## Error in strptime(hourlyIntensities_data[["ActivityHour"]], format = "%m/%d/%Y %H:%M:%S %p"): object 'hourlyIntensities_data' not found
 
 ##### Check for irregularities
 
@@ -278,7 +281,30 @@ hourlyIntensities_data[["ActivityHour"]] <-  as.POSIXct(strptime(hourlyIntensiti
 summary(sleep_data)
 ```
 
-    ## Error in summary(sleep_data): object 'sleep_data' not found
+    ##        Id               SleepDay   TotalSleepRecords TotalMinutesAsleep
+    ##  Min.   :1.504e+09   Min.   :NA    Min.   :1.000     Min.   : 58.0     
+    ##  1st Qu.:3.977e+09   1st Qu.:NA    1st Qu.:1.000     1st Qu.:361.0     
+    ##  Median :4.703e+09   Median :NA    Median :1.000     Median :432.5     
+    ##  Mean   :5.001e+09   Mean   :NaN   Mean   :1.119     Mean   :419.2     
+    ##  3rd Qu.:6.962e+09   3rd Qu.:NA    3rd Qu.:1.000     3rd Qu.:490.0     
+    ##  Max.   :8.792e+09   Max.   :NA    Max.   :3.000     Max.   :796.0     
+    ##  NA's   :6           NA's   :419   NA's   :6         NA's   :5         
+    ##  TotalTimeInBed    Total.hours.asleep Total.hours.in.bed  subtraction     
+    ##  Min.   :  4.894   Min.   : 1.000     Min.   : 1.000     Min.   :  0.000  
+    ##  1st Qu.:402.250   1st Qu.: 6.000     1st Qu.: 7.000     1st Qu.:  0.000  
+    ##  Median :463.000   Median : 7.000     Median : 8.000     Median :  0.000  
+    ##  Mean   :457.543   Mean   : 7.005     Mean   : 7.632     Mean   :  1.135  
+    ##  3rd Qu.:526.000   3rd Qu.: 8.000     3rd Qu.: 9.000     3rd Qu.:  1.000  
+    ##  Max.   :961.000   Max.   :13.000     Max.   :16.000     Max.   :235.000  
+    ##  NA's   :5         NA's   :6          NA's   :6          NA's   :5        
+    ##  differenceminutes      X            
+    ##  Min.   : 4.00     Length:419        
+    ##  1st Qu.:21.00     Class :character  
+    ##  Median :21.00     Mode  :character  
+    ##  Mean   :21.21                       
+    ##  3rd Qu.:21.00                       
+    ##  Max.   :46.00                       
+    ##  NA's   :2
 
 First thing I notice in TotalMinutesAsleep is Min value of less than an
 hour and Max value higher than 13 hours. Also, total sleep records for
@@ -289,16 +315,12 @@ these outliers from TotalMinutesAsleep and TotalTimeinBed
 sleep_data <- sleep_data[-c(which(sleep_data$TotalMinutesAsleep > 552 | sleep_data$TotalMinutesAsleep < 180 | sleep_data$TotalTimeInBed > 660)), ]
 ```
 
-    ## Error in eval(expr, envir, enclos): object 'sleep_data' not found
-
 remove rows where users recorded sleep records more than once a day
 $TotalSleepRecords \> 1
 
 ``` r
 sleep_data <- sleep_data[-c(which(sleep_data$TotalSleepRecords > 1.0)), ]
 ```
-
-    ## Error in eval(expr, envir, enclos): object 'sleep_data' not found
 
 ##### Cleaning and Filtering
 
@@ -309,23 +331,17 @@ filter ‘heartrate_data’ to contain data for user_6 only
 heartrate_data <- filter(heartrate_data, heartrate_data$Id == "2022484408")
 ```
 
-    ## Error in filter(heartrate_data, heartrate_data$Id == "2022484408"): object 'heartrate_data' not found
-
 and then filter for date
 
 ``` r
 heartrate_data <- heartrate_data %>% filter(grepl('4/12/2016', heartrate_data$Time))
 ```
 
-    ## Error in filter(., grepl("4/12/2016", heartrate_data$Time)): object 'heartrate_data' not found
-
 and then re label Id to user_6
 
 ``` r
 heartrate_data$Id[heartrate_data$Id == "2022484408"] <- "user_6"
 ```
-
-    ## Error in heartrate_data$Id[heartrate_data$Id == "2022484408"] <- "user_6": object 'heartrate_data' not found
 
 Step 2: **Sleep Data**
 
@@ -347,39 +363,23 @@ sleep_data <- purrr::map2_df(
   dplyr::relocate(User,.after = Id)
 ```
 
-    ## Error in dplyr::mutate(., User = if_else(Id == .x, .y, "")): object 'sleep_data' not found
-
 convert TotalMinutesAsleep to TotalHoursAsleep, apply TotalHoursAsleep
 to sleep_data
 
 ``` r
 TotalHoursAsleep <- sleep_data$TotalMinutesAsleep/60
-```
-
-    ## Error in eval(expr, envir, enclos): object 'sleep_data' not found
-
-``` r
 sleep_data$TotalHoursAsleep <- TotalHoursAsleep
 ```
-
-    ## Error in eval(expr, envir, enclos): object 'TotalHoursAsleep' not found
 
 mean hours asleep for each user, rename TotalHoursAsleep to
 avghoursasleep
 
 ``` r
 sleep_datatwo <- aggregate(TotalHoursAsleep ~ User, sleep_data, mean)
-```
-
-    ## Error in eval(m$data, parent.frame()): object 'sleep_data' not found
-
-``` r
 sleep_datatwo <- sleep_datatwo %>% 
   rename(
     avg_hours_asleep = TotalHoursAsleep)
 ```
-
-    ## Error in rename(., avg_hours_asleep = TotalHoursAsleep): object 'sleep_datatwo' not found
 
 Step 3: **hourlyIntensities_data** filter hourlyIntensities_data for
 user_6 and 4/12/2016
@@ -389,8 +389,6 @@ hourlyIntensities_data <- filter(hourlyIntensities_data, Id == "2022484408", gre
   mutate(Id = recode(Id, "2022484408" = "user_6"))
 ```
 
-    ## Error in filter(hourlyIntensities_data, Id == "2022484408", grepl("4/12/2016", : object 'hourlyIntensities_data' not found
-
 remove first 10 characters from ActivityHour Variable to create new
 Value (variable)
 
@@ -398,15 +396,11 @@ Value (variable)
 hourlyIntensities_data$ActivityHour <- str_sub(hourlyIntensities_data$ActivityHour, 11, 21)
 ```
 
-    ## Error in stri_sub(string, from = start, to = end): object 'hourlyIntensities_data' not found
-
 remove :00 from hourlyIntensities_data$ActivityHour
 
 ``` r
 hourlyIntensities_data$ActivityHour <- gsub(':00 '," ", hourlyIntensities_data$ActivityHour)
 ```
-
-    ## Error in is.factor(x): object 'hourlyIntensities_data' not found
 
 create x axis limits then use scale_x\_discrete to create plot
 
@@ -423,7 +417,11 @@ find number of times each user used Weight Log
 table(weightLog_data$Id)
 ```
 
-    ## Error in table(weightLog_data$Id): object 'weightLog_data' not found
+    ## 
+    ## 1503960366 1927972279 2873212765 4319703577 4558609924 5577150313 6962181067 
+    ##          2          1          2          2          5          1         30 
+    ## 8877689391 
+    ##         24
 
 create data frame with info
 
@@ -514,7 +512,7 @@ drop data from user 4 and user 18 due to unrealistic sleep times. 22 of
 My first analysis will be of sleepDay_merged data. I want to analyze
 normal amount of sleep per user from April to May of 2016.
 
-![alt text](/cloud/project/data_visualizations/sleep_data_update2.jpeg)
+![alt text](/cloud/project/sleep_data_update2.jpg)
 
 ``` r
 ggplot(data=sleep_datatwo, aes(x=User,y=avg_hours_asleep, group=1)) +
@@ -525,8 +523,6 @@ ggplot(data=sleep_datatwo, aes(x=User,y=avg_hours_asleep, group=1)) +
           subtitle = "03.12.2016-05.12.2016 ")
 ```
 
-    ## Error in ggplot(data = sleep_datatwo, aes(x = User, y = avg_hours_asleep, : object 'sleep_datatwo' not found
-
 #### Heart Rate vs Average Intensity
 
 Next, I visualized the data from user 6 on 2016-04-16 from 7AM to 8PM to
@@ -535,9 +531,8 @@ graphs look similar indicating a strong relationship. This relationship
 is reinforced by a correlation coefficient of **0.878** measured between
 heart rate and average intensity.
 
-![Heart Rate
-Plot](/cloud/project/data_visualizations/heart%20rate%20plot_final.jpeg)
-\#### Heart Rate
+![Heart Rate Plot](/cloud/project/heart%20rate%20plot_final.jpg) \####
+Heart Rate
 
 ``` r
 heartrate_data %>%
@@ -551,10 +546,7 @@ heartrate_data %>%
           subtitle = "4-12-2016")
 ```
 
-    ## Error in mutate(., heartrate_data, Time = as.POSIXct(Time, format = "%m/%d/%Y %I:%M:%OS %p")): object 'heartrate_data' not found
-
-![Average Intensity
-Plot](/cloud/project/data_visualizations/average_intensity_plot.jpeg)
+![Average Intensity Plot](/cloud/project/average_intensity_plot.jpg)
 
 #### Average Intensity
 
@@ -562,7 +554,7 @@ Plot](/cloud/project/data_visualizations/average_intensity_plot.jpeg)
 as.numeric(hourlyIntensities_data$ActivityHour)
 ```
 
-    ## Error in eval(expr, envir, enclos): object 'hourlyIntensities_data' not found
+    ## numeric(0)
 
 ``` r
 dput(axisorder)
@@ -577,20 +569,6 @@ hourlyIntensities_data$ActivityHour <- as.POSIXct(hourlyIntensities_data$Activit
                                                   format = "%I:%M %p")
 ```
 
-    ## Error in as.POSIXct(hourlyIntensities_data$ActivityHour, format = "%I:%M %p"): object 'hourlyIntensities_data' not found
-
-``` r
-ggplot(data=hourlyIntensities_data, aes(x = ActivityHour, y = AverageIntensity, group = 1 )) +
-  geom_point() +
-  geom_line()+
-  theme(axis.text.x = element_text(angle = 45)) + 
-  scale_x_discrete(limits = axisorder) +
-  ggtitle("Average Intensity user_6",
-          subtitle = "4-12-2016")
-```
-
-    ## Error in ggplot(data = hourlyIntensities_data, aes(x = ActivityHour, y = AverageIntensity, : object 'hourlyIntensities_data' not found
-
 #### Weight Log
 
 My third visualization is indicating a lack of data entry in weight log
@@ -600,8 +578,7 @@ I am assuming this has to do with weight scales not being available,
 lack of knowledge on how to measure BMI, or inconveniences in entering
 data.
 
-![Weight Log
-plot](/cloud/project/data_visualizations/Lack%20of%20weight%20data.jpeg)
+![Weight Log plot](/cloud/project/file_show.jpg)
 
 plot
 
@@ -621,15 +598,11 @@ chosen at random to avoid bias. filter sleep data for user 5
 sleepday_User5 <- select(filter(sleep_data,Id %in% c("1927972279")), c(Id, SleepDay, TotalSleepRecords, TotalMinutesAsleep, TotalTimeInBed, TotalHoursAsleep))
 ```
 
-    ## Error in filter(sleep_data, Id %in% c("1927972279")): object 'sleep_data' not found
-
 user 13
 
 ``` r
 sleepday_User13 <- filter(sleep_data, Id == 4020332650)
 ```
-
-    ## Error in filter(sleep_data, Id == 4020332650): object 'sleep_data' not found
 
 user 17
 
@@ -637,25 +610,26 @@ user 17
 sleepday_User17 <- filter(sleep_data, Id == 4445114986)
 ```
 
-    ## Error in filter(sleep_data, Id == 4445114986): object 'sleep_data' not found
-
 ``` r
 summary(sleepday_User13$TotalHoursAsleep)
 ```
 
-    ## Error in summary(sleepday_User13$TotalHoursAsleep): object 'sleepday_User13' not found
+    ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+    ##   3.767   5.717   6.417   6.471   7.667   8.350
 
 ``` r
 summary(sleepday_User17$TotalHoursAsleep)
 ```
 
-    ## Error in summary(sleepday_User17$TotalHoursAsleep): object 'sleepday_User17' not found
+    ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+    ##   5.367   6.242   7.267   6.971   7.658   8.367
 
 ``` r
 summary(sleepday_User5$TotalHoursAsleep)
 ```
 
-    ## Error in summary(sleepday_User5$TotalHoursAsleep): object 'sleepday_User5' not found
+    ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+    ##   4.933   5.358   5.783   5.783   6.208   6.633
 
 # Step 6 - Act
 

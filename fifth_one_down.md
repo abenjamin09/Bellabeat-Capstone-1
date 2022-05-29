@@ -131,7 +131,7 @@ away with.
 -   Are there any problems with the data? Missing data, outliers, and
     light format issues.
 
-#### Description of Data Sources
+## Description of Data Sources
 
 [FitBit Fitness Tracker
 Data](https://www.kaggle.com/datasets/arashnic/fitbit) (CC0: Public
@@ -157,7 +157,7 @@ steps, and heart rate that can be used to explore users’ habits.
 -   Have you documented your cleaning process so you can review and
     share those results? Yes
 
-# Documented Cleaning Process
+## Documented Cleaning Process
 
 ## Import datasets
 

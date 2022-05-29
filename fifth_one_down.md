@@ -1,6 +1,7 @@
-## Google Data Analytics Professional Certificate
-### Capstone #1 Bellabeat
-Andrew Benjamin
+# Google Data Analytics Professional Certificate
+### Capstone #1 - Bellabeat  
+#### 2022-05-29  
+#### Andrew Benjamin
 
 ``` r
 library(ggplot2)

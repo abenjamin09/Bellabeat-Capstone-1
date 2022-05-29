@@ -312,7 +312,7 @@ sleep_data <- sleep_data[-c(which(sleep_data$TotalSleepRecords > 1.0)), ]
 
 ## Cleaning and Filtering
 
-Step 1: **heartrate_data** 
+Step 1: heartrate_data
 
 heartrate_data is a very large data set so I
 filter ‘heartrate_data’ to contain data for user_6 only
@@ -333,7 +333,7 @@ and then re label Id to user_6
 heartrate_data$Id[heartrate_data$Id == "2022484408"] <- "user_6"
 ```
 
-Step 2: **Sleep Data**
+Step 2: Sleep Data
 
 First, I notice is that Id column contains number values to identify
 users and I would like to add a new category which correlates these
@@ -371,7 +371,7 @@ sleep_datatwo <- sleep_datatwo %>%
     avg_hours_asleep = TotalHoursAsleep)
 ```
 
-Step 3: **hourlyIntensities_data** filter hourlyIntensities_data for
+Step 3: hourlyIntensities_data filter hourlyIntensities_data for
 user_6 and 4/12/2016
 
 ``` r
@@ -399,7 +399,7 @@ axisorder <- c("7:00 AM", "8:00 AM", "9:00 AM", "10:00 AM", "11:00 AM", "12:00 A
                "3:00 PM","4:00 PM","5:00 PM","6:00 PM","7:00 PM","8:00 PM")
 ```
 
-Step 4: **Weight Log Data**
+Step 4: Weight Log Data
 
 find number of times each user used Weight Log
 
@@ -599,7 +599,7 @@ user 17
 ``` r
 sleepday_User17 <- filter(sleep_data, Id == 4445114986)
 ```
-summary statistics
+summary statistics:
 ``` r
 summary(sleepday_User13$TotalHoursAsleep)
 ```

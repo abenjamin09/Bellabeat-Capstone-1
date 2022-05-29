@@ -180,7 +180,7 @@ heartrate_data <- read.csv("/cloud/project/capstone project/R Projects/heartrate
 hourlyIntensities_data <- read.csv("/cloud/project/capstone project/R Projects/hourlyIntensities_merged.csv")
 ```
 
-### View datasets
+## View datasets
 
 Next, I viewed the head of these data sets
 
@@ -241,7 +241,7 @@ glimpse(hourlyIntensities_data)
 
 ## Check for structural errors
 
-first issue I see is that columns SleepDay, Date, Time, and ActivityHour
+First issue I see is that columns SleepDay, Date, Time, and ActivityHour
 all have character format instead of datetime, I will change these
 values to the correct format. Beginning with weightLog_data.
 
@@ -249,17 +249,16 @@ values to the correct format. Beginning with weightLog_data.
 weightLog_data[['Date']] <- as.POSIXct(strptime(weightLog_data[['Date']], "%m/%d/%Y %H:%M"), format = "%Y/%m/%d %I:%M %p")
 ```
 
-I will then repeat these steps for sleep_data, heartrate, and
-hourly_intensities
+I will then repeat these steps for sleep
 
 ``` r
 sleep_data[["SleepDay"]] <- as.POSIXct(strptime(sleep_data[["SleepDay"]], "%m/%d/%Y %H:%M:%S %p"), format = "%Y/%m/%d %I:%M:%S %p")
 ```
-
+heart rate
 ``` r
 heartrate_data[["Time"]] <- as.POSIXct(strptime(heartrate_data[["Time"]],format="%m/%d/%Y %H:%M:%S %p"), format = "%Y/%m/%d %H:%M:%S %p")
 ```
-
+hourly intensities
 ``` r
 hourlyIntensities_data[["ActivityHour"]] <-  as.POSIXct(strptime(hourlyIntensities_data[["ActivityHour"]],format="%m/%d/%Y %H:%M:%S %p"), format = "%Y/%m/%d %H:%M:%S %p")
 ```
@@ -295,16 +294,16 @@ summary(sleep_data)
     ##  Max.   :46.00                       
     ##  NA's   :2
 
-First thing I notice in TotalMinutesAsleep is Min value of less than an
-hour and Max value higher than 13 hours. Also, total sleep records for
+First, I notice in TotalMinutesAsleep min value of less than an
+hour and max value higher than 13 hours. Secondly, total sleep records for
 some users is greater than 1. I will remove these instances. To remove
-these outliers from TotalMinutesAsleep and TotalTimeinBed
+these outliers from TotalMinutesAsleep and sleep records:
 
 ``` r
 sleep_data <- sleep_data[-c(which(sleep_data$TotalMinutesAsleep > 552 | sleep_data$TotalMinutesAsleep < 180 | sleep_data$TotalTimeInBed > 660)), ]
 ```
 
-remove rows where users recorded sleep records more than once a day
+Remove rows where users recorded sleep records more than once a day
 $TotalSleepRecords \> 1
 
 ``` r
@@ -313,7 +312,9 @@ sleep_data <- sleep_data[-c(which(sleep_data$TotalSleepRecords > 1.0)), ]
 
 ## Cleaning and Filtering
 
-Step 1: **heartrate_data** heartrate_data is a very large data set so I
+Step 1: **heartrate_data** 
+
+heartrate_data is a very large data set so I
 filter ‘heartrate_data’ to contain data for user_6 only
 
 ``` r
@@ -442,7 +443,7 @@ repeated_users <- data.frame(id, times_used)
     to be worked on to make it easier for users to track their weight
     and BMI.
 
-#### Summary of Analysis
+## Summary of Analysis
 
 After reviewing these data sets I have discovered three major trends.
 First is from the sleepday_merged data set. Here, I analyzed the average
@@ -490,9 +491,9 @@ logging their weight information.
 -   Is your presentation accessible to your audience? Yes presentation
     is accessible to audience
 
-#### Visualizations and Key Findings
+## Visualizations and Key Findings
 
-#### Sleep Patterns
+### Sleep Patterns
 
 This visualization represents sleep patterns of users. I have decided to
 drop data from user 4 and user 18 due to unrealistic sleep times. 22 of
@@ -512,7 +513,7 @@ ggplot(data=sleep_datatwo, aes(x=User,y=avg_hours_asleep, group=1)) +
           subtitle = "03.12.2016-05.12.2016 ")
 ```
 
-#### Heart Rate vs Average Intensity
+### Heart Rate vs Average Intensity
 
 Next, I visualized the data from user 6 on 2016-04-16 from 7AM to 8PM to
 show how his heart rate varied along with his average intensity. The
@@ -522,7 +523,7 @@ heart rate and average intensity.
 
 ![Heart Rate Plot](heart_rate_plot_final.jpg) 
 
-####Heart Rate
+### Heart Rate
 
 ``` r
 heartrate_data %>%
@@ -538,7 +539,7 @@ heartrate_data %>%
 
 ![Average Intensity Plot](average_intensity_plot.jpg)
 
-#### Average Intensity
+### Average Intensity
 
 ``` r
 as.numeric(hourlyIntensities_data$ActivityHour)
@@ -559,7 +560,7 @@ hourlyIntensities_data$ActivityHour <- as.POSIXct(hourlyIntensities_data$Activit
                                                   format = "%I:%M %p")
 ```
 
-#### Weight Log
+### Weight Log
 
 My third visualization is indicating a lack of data entry in weight log
 information. The number of users that logged weight information is very
@@ -569,8 +570,6 @@ lack of knowledge on how to measure BMI, or inconveniences in entering
 data.
 
 ![Weight Log plot](file_show.jpg)
-
-plot
 
 ``` r
 ggplot(data = repeated_users, aes(x = id, y = times_used)) +
@@ -584,6 +583,7 @@ I have decided to create summary statistics for users 5, 13, and 17 in
 order to analyze specifics of nightly sleep schedules. The users were
 chosen at random to avoid bias. filter sleep data for user 5
 
+user_5
 ``` r
 sleepday_User5 <- select(filter(sleep_data,Id %in% c("1927972279")), c(Id, SleepDay, TotalSleepRecords, TotalMinutesAsleep, TotalTimeInBed, TotalHoursAsleep))
 ```
@@ -599,7 +599,7 @@ user 17
 ``` r
 sleepday_User17 <- filter(sleep_data, Id == 4445114986)
 ```
-
+summary statistics
 ``` r
 summary(sleepday_User13$TotalHoursAsleep)
 ```

@@ -1,9 +1,6 @@
-Google Data Analytics Professional Certificate
-================
+## Google Data Analytics Professional Certificate
+### Capstone #1 Bellabeat
 Andrew Benjamin
-2022-05-15
-
-true
 
 ``` r
 library(ggplot2)
@@ -11,14 +8,6 @@ library(dplyr)
 library(tidyverse)
 library(ezknitr)
 ```
-
-``` r
-install.packages("ezknitr")
-```
-
-    ## Installing package into '/cloud/lib/x86_64-pc-linux-gnu-library/4.2'
-    ## (as 'lib' is unspecified)
-
 ## Introduction
 
 Welcome to the Bellabeat data analysis case study! In this case study,
@@ -170,7 +159,7 @@ steps, and heart rate that can be used to explore users’ habits.
 
 # Documented Cleaning Process
 
-##### Import datasets
+## Import datasets
 
 First I imported sleepDay_merged, weightLogInfo_merged,
 heartrate_seconds_merged, and hourlyIntensities data sets.
@@ -191,7 +180,7 @@ heartrate_data <- read.csv("/cloud/project/capstone project/R Projects/heartrate
 hourlyIntensities_data <- read.csv("/cloud/project/capstone project/R Projects/hourlyIntensities_merged.csv")
 ```
 
-##### View datasets
+### View datasets
 
 Next, I viewed the head of these data sets
 
@@ -250,7 +239,7 @@ glimpse(hourlyIntensities_data)
     ## $ TotalIntensity   <int> 20, 8, 7, 0, 0, 0, 0, 0, 13, 30, 29, 12, 11, 6, 36, 5…
     ## $ AverageIntensity <dbl> 0.333333, 0.133333, 0.116667, 0.000000, 0.000000, 0.0…
 
-##### Check for structural errors
+## Check for structural errors
 
 first issue I see is that columns SleepDay, Date, Time, and ActivityHour
 all have character format instead of datetime, I will change these
@@ -275,7 +264,7 @@ heartrate_data[["Time"]] <- as.POSIXct(strptime(heartrate_data[["Time"]],format=
 hourlyIntensities_data[["ActivityHour"]] <-  as.POSIXct(strptime(hourlyIntensities_data[["ActivityHour"]],format="%m/%d/%Y %H:%M:%S %p"), format = "%Y/%m/%d %H:%M:%S %p")
 ```
 
-##### Check for irregularities
+##  Check for irregularities
 
 ``` r
 summary(sleep_data)
@@ -322,7 +311,7 @@ $TotalSleepRecords \> 1
 sleep_data <- sleep_data[-c(which(sleep_data$TotalSleepRecords > 1.0)), ]
 ```
 
-##### Cleaning and Filtering
+## Cleaning and Filtering
 
 Step 1: **heartrate_data** heartrate_data is a very large data set so I
 filter ‘heartrate_data’ to contain data for user_6 only
@@ -512,7 +501,7 @@ drop data from user 4 and user 18 due to unrealistic sleep times. 22 of
 My first analysis will be of sleepDay_merged data. I want to analyze
 normal amount of sleep per user from April to May of 2016.
 
-![alt text](/cloud/project/sleep_data_update2.jpg)
+![sleep data](sleep_data_update2.jpg)
 
 ``` r
 ggplot(data=sleep_datatwo, aes(x=User,y=avg_hours_asleep, group=1)) +
@@ -531,8 +520,9 @@ graphs look similar indicating a strong relationship. This relationship
 is reinforced by a correlation coefficient of **0.878** measured between
 heart rate and average intensity.
 
-![Heart Rate Plot](/cloud/project/heart%20rate%20plot_final.jpg) \####
-Heart Rate
+![Heart Rate Plot](heart_rate_plot_final.jpg) 
+
+####Heart Rate
 
 ``` r
 heartrate_data %>%
@@ -546,7 +536,7 @@ heartrate_data %>%
           subtitle = "4-12-2016")
 ```
 
-![Average Intensity Plot](/cloud/project/average_intensity_plot.jpg)
+![Average Intensity Plot](average_intensity_plot.jpg)
 
 #### Average Intensity
 
@@ -578,7 +568,7 @@ I am assuming this has to do with weight scales not being available,
 lack of knowledge on how to measure BMI, or inconveniences in entering
 data.
 
-![Weight Log plot](/cloud/project/file_show.jpg)
+![Weight Log plot](file_show.jpg)
 
 plot
 

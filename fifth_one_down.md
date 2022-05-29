@@ -8,7 +8,7 @@ library(dplyr)
 library(tidyverse)
 library(ezknitr)
 ```
-## Introduction
+# Introduction
 
 Welcome to the Bellabeat data analysis case study! In this case study,
 you will perform many real-world tasks of a junior data analyst. You
@@ -24,7 +24,7 @@ study anytime. Then, when you begin your job hunt, your case study will
 be a tangible way to demonstrate your knowledge and skills to potential
 employers
 
-## Characters and products
+# Characters and products
 
 -   Characters
     -   Urška Sršen: Bellabeat’s cofounder and Chief Creative Officer
@@ -157,7 +157,7 @@ steps, and heart rate that can be used to explore users’ habits.
 -   Have you documented your cleaning process so you can review and
     share those results? Yes
 
-## Documented Cleaning Process
+# Documented Cleaning Process
 
 ## Import datasets
 
@@ -312,7 +312,7 @@ sleep_data <- sleep_data[-c(which(sleep_data$TotalSleepRecords > 1.0)), ]
 
 ## Cleaning and Filtering
 
-Step 1: heartrate_data
+**Step 1: heartrate_data**
 
 heartrate_data is a very large data set so I
 filter ‘heartrate_data’ to contain data for user_6 only
@@ -333,7 +333,7 @@ and then re label Id to user_6
 heartrate_data$Id[heartrate_data$Id == "2022484408"] <- "user_6"
 ```
 
-Step 2: Sleep Data
+**Step 2: Sleep Data**
 
 First, I notice is that Id column contains number values to identify
 users and I would like to add a new category which correlates these
@@ -371,7 +371,9 @@ sleep_datatwo <- sleep_datatwo %>%
     avg_hours_asleep = TotalHoursAsleep)
 ```
 
-Step 3: hourlyIntensities_data filter hourlyIntensities_data for
+**Step 3: hourlyIntensities_data** 
+
+filter hourlyIntensities_data for
 user_6 and 4/12/2016
 
 ``` r
@@ -399,7 +401,7 @@ axisorder <- c("7:00 AM", "8:00 AM", "9:00 AM", "10:00 AM", "11:00 AM", "12:00 A
                "3:00 PM","4:00 PM","5:00 PM","6:00 PM","7:00 PM","8:00 PM")
 ```
 
-Step 4: Weight Log Data
+**Step 4: Weight Log Data**
 
 find number of times each user used Weight Log
 
@@ -581,9 +583,9 @@ ggplot(data = repeated_users, aes(x = id, y = times_used)) +
 
 I have decided to create summary statistics for users 5, 13, and 17 in
 order to analyze specifics of nightly sleep schedules. The users were
-chosen at random to avoid bias. filter sleep data for user 5
+chosen at random to avoid bias. 
 
-user_5
+filter sleep data for user_5
 ``` r
 sleepday_User5 <- select(filter(sleep_data,Id %in% c("1927972279")), c(Id, SleepDay, TotalSleepRecords, TotalMinutesAsleep, TotalTimeInBed, TotalHoursAsleep))
 ```

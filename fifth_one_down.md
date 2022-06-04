@@ -9,17 +9,9 @@ true
 library(ggplot2)
 library(dplyr)
 library(tidyverse)
-library(ezknitr)
 ```
 
-``` r
-install.packages("ezknitr")
-```
-
-    ## Installing package into '/cloud/lib/x86_64-pc-linux-gnu-library/4.2'
-    ## (as 'lib' is unspecified)
-
-## Introduction
+# Introduction
 
 Welcome to the Bellabeat data analysis case study! In this case study,
 you will perform many real-world tasks of a junior data analyst. You
@@ -35,7 +27,7 @@ study anytime. Then, when you begin your job hunt, your case study will
 be a tangible way to demonstrate your knowledge and skills to potential
 employers
 
-## Characters and products
+# Characters and products
 
 -   Characters
     -   Urška Sršen: Bellabeat’s cofounder and Chief Creative Officer
@@ -117,13 +109,14 @@ away with.
 -   Where is your data stored? Excel
 -   How is the data organized? Is it in long or wide format? Long
 -   Are there issues with bias or credibility in this data? Yes, there
-    are issues with bias and credibility because it is survey based so
-    only users who are interested in responding provide the data.
-    Secondly, the amount of data provided is from 30 users only which is
-    not a large enough sample size for unbiased data. Lastly, there are
-    outside factors which could affect data results. For example, time
-    line: the data supplied is for 2 months in spring, however, exercise
-    habits change from season to season.
+    are issues with bias and credibility because it is a survey, so only
+    users who are interested in responding provide the data. Secondly,
+    the amount of data provided is from 30 users which is not a large
+    enough sample size for credible data. Lastly, there are outside
+    factors which could affect data results. For example, time line, the
+    data supplied is for 2 months in the spring, however, exercise
+    habits change from season to season which may affect trends in data
+    source.
 -   Does your data ROCCC? Reliable - Yes data is from Amazon a
     trustworthy source Original - yes data comes from 30 original users
     from a specific time period Comprehensive - No, incomplete data due
@@ -132,17 +125,16 @@ away with.
 -   How are you addressing licensing, privacy, security, and
     accessibility? No licensing/privacy issues because data comes from
     an open source, security is fine because no personal information is
-    used and accessibility is easy.
+    used and accessibility is clear.
 -   How did you verify the data’s integrity? Maintained log of
     manipulations and kept data in one secure location
 -   How does it help you answer your question? We can use the data from
-    non Bellabeat smart device users to help bring analytical and data
-    driven trends in user usage in order to influence the success of the
-    marketing strategy of Bellabeat app.
+    non Bellabeat smart device users to help understand trends in user
+    usage to influence the marketing strategy of the Bellabeat app.
 -   Are there any problems with the data? Missing data, outliers, and
     light format issues.
 
-#### Description of Data Sources
+## Description of Data Sources
 
 [FitBit Fitness Tracker
 Data](https://www.kaggle.com/datasets/arashnic/fitbit) (CC0: Public
@@ -160,7 +152,7 @@ steps, and heart rate that can be used to explore users’ habits.
 -   Have you ensured your data’s integrity? Throughout my process I will
     log updates/changes to data sets.
 -   What steps have you taken to ensure that your data is clean? Check
-    formatting, blank cells, extra white spaces, misspelling, and
+    formatting, blank cells, extra white spaces, misspellings, and
     duplicates.
 -   How can you verify that your data is clean and ready to analyze?
     Ensuring that formatting is correct, remove/update missing data, and
@@ -170,7 +162,7 @@ steps, and heart rate that can be used to explore users’ habits.
 
 # Documented Cleaning Process
 
-##### Import datasets
+## Import datasets
 
 First I imported sleepDay_merged, weightLogInfo_merged,
 heartrate_seconds_merged, and hourlyIntensities data sets.
@@ -191,7 +183,7 @@ heartrate_data <- read.csv("/cloud/project/capstone project/R Projects/heartrate
 hourlyIntensities_data <- read.csv("/cloud/project/capstone project/R Projects/hourlyIntensities_merged.csv")
 ```
 
-##### View datasets
+## View datasets
 
 Next, I viewed the head of these data sets
 
@@ -250,7 +242,7 @@ glimpse(hourlyIntensities_data)
     ## $ TotalIntensity   <int> 20, 8, 7, 0, 0, 0, 0, 0, 13, 30, 29, 12, 11, 6, 36, 5…
     ## $ AverageIntensity <dbl> 0.333333, 0.133333, 0.116667, 0.000000, 0.000000, 0.0…
 
-##### Check for structural errors
+## Check for structural errors
 
 first issue I see is that columns SleepDay, Date, Time, and ActivityHour
 all have character format instead of datetime, I will change these
@@ -271,11 +263,10 @@ sleep_data[["SleepDay"]] <- as.POSIXct(strptime(sleep_data[["SleepDay"]], "%m/%d
 heartrate_data[["Time"]] <- as.POSIXct(strptime(heartrate_data[["Time"]],format="%m/%d/%Y %H:%M:%S %p"), format = "%Y/%m/%d %H:%M:%S %p")
 ```
 
-``` r
-hourlyIntensities_data[["ActivityHour"]] <-  as.POSIXct(strptime(hourlyIntensities_data[["ActivityHour"]],format="%m/%d/%Y %H:%M:%S %p"), format = "%Y/%m/%d %H:%M:%S %p")
-```
+ommited hourly_intensities and instead ran code below due to order of
+running code causing errors
 
-##### Check for irregularities
+## Check for irregularities
 
 ``` r
 summary(sleep_data)
@@ -322,7 +313,7 @@ $TotalSleepRecords \> 1
 sleep_data <- sleep_data[-c(which(sleep_data$TotalSleepRecords > 1.0)), ]
 ```
 
-##### Cleaning and Filtering
+## Cleaning and Filtering
 
 Step 1: **heartrate_data** heartrate_data is a very large data set so I
 filter ‘heartrate_data’ to contain data for user_6 only
@@ -343,7 +334,7 @@ and then re label Id to user_6
 heartrate_data$Id[heartrate_data$Id == "2022484408"] <- "user_6"
 ```
 
-Step 2: **Sleep Data**
+**Step 2: Sleep Data**
 
 First, I notice is that Id column contains number values to identify
 users and I would like to add a new category which correlates these
@@ -381,7 +372,7 @@ sleep_datatwo <- sleep_datatwo %>%
     avg_hours_asleep = TotalHoursAsleep)
 ```
 
-Step 3: **hourlyIntensities_data** filter hourlyIntensities_data for
+**Step 3: hourlyIntensities_data** filter hourlyIntensities_data for
 user_6 and 4/12/2016
 
 ``` r
@@ -389,8 +380,7 @@ hourlyIntensities_data <- filter(hourlyIntensities_data, Id == "2022484408", gre
   mutate(Id = recode(Id, "2022484408" = "user_6"))
 ```
 
-remove first 10 characters from ActivityHour Variable to create new
-Value (variable)
+remove first 10 characters from ActivityHour column
 
 ``` r
 hourlyIntensities_data$ActivityHour <- str_sub(hourlyIntensities_data$ActivityHour, 11, 21)
@@ -409,7 +399,17 @@ axisorder <- c("7:00 AM", "8:00 AM", "9:00 AM", "10:00 AM", "11:00 AM", "12:00 A
                "3:00 PM","4:00 PM","5:00 PM","6:00 PM","7:00 PM","8:00 PM")
 ```
 
-Step 4: **Weight Log Data**
+convert ActivityHour to posixct
+
+``` r
+hourlyIntensities_data$ActivityHour <- structure(c(1653782400, 1653786000, 1653789600, 1653793200, 1653796800, 
+1653800400, 1653804000, 1653807600, 1653811200, 1653814800, 1653818400, 
+1653822000, 1653825600, 1653829200, 1653832800, 1653836400, 1653840000, 
+1653843600, 1653847200, 1653850800, 1653854400, 1653858000, 1653861600, 
+1653865200), class = c("POSIXct", "POSIXt"), tzone = "")
+```
+
+**Step 4: Weight Log Data**
 
 find number of times each user used Weight Log
 
@@ -453,7 +453,7 @@ repeated_users <- data.frame(id, times_used)
     to be worked on to make it easier for users to track their weight
     and BMI.
 
-#### Summary of Analysis
+## Summary of Analysis
 
 After reviewing these data sets I have discovered three major trends.
 First is from the sleepday_merged data set. Here, I analyzed the average
@@ -501,9 +501,9 @@ logging their weight information.
 -   Is your presentation accessible to your audience? Yes presentation
     is accessible to audience
 
-#### Visualizations and Key Findings
+## Visualizations and Key Findings
 
-#### Sleep Patterns
+### Sleep Patterns
 
 This visualization represents sleep patterns of users. I have decided to
 drop data from user 4 and user 18 due to unrealistic sleep times. 22 of
@@ -523,7 +523,7 @@ ggplot(data=sleep_datatwo, aes(x=User,y=avg_hours_asleep, group=1)) +
           subtitle = "03.12.2016-05.12.2016 ")
 ```
 
-#### Heart Rate vs Average Intensity
+### Heart Rate vs Average Intensity
 
 Next, I visualized the data from user 6 on 2016-04-16 from 7AM to 8PM to
 show how his heart rate varied along with his average intensity. The
@@ -531,7 +531,7 @@ graphs look similar indicating a strong relationship. This relationship
 is reinforced by a correlation coefficient of **0.878** measured between
 heart rate and average intensity.
 
-![Heart Rate Plot](/cloud/project/heart%20rate%20plot_final.jpg) \####
+![Heart Rate Plot](/cloud/project/heart%20rate%20plot_final.jpg) \###
 Heart Rate
 
 ``` r
@@ -546,30 +546,21 @@ heartrate_data %>%
           subtitle = "4-12-2016")
 ```
 
-![Average Intensity Plot](/cloud/project/average_intensity_plot.jpg)
+![Average Intensity Plot](/cloud/project/ActivityHour_plot.png)
 
-#### Average Intensity
-
-``` r
-as.numeric(hourlyIntensities_data$ActivityHour)
-```
-
-    ## numeric(0)
+### Average Intensity
 
 ``` r
-dput(axisorder)
+  ggplot(data=hourlyIntensities_data, aes(x = ActivityHour, y = AverageIntensity)) +
+  geom_point() +
+  geom_line() +
+  theme(axis.text.x = element_text(angle = 45)) + 
+  scale_x_datetime(date_breaks = "hour", limits = c(as.POSIXct("2022-05-29 07:00:00"),as.POSIXct("2022-05-29 19:00:00"))) +
+  ggtitle("Average Intensity user_6",
+          subtitle = "4-12-2016")
 ```
 
-    ## c("7:00 AM", "8:00 AM", "9:00 AM", "10:00 AM", "11:00 AM", "12:00 AM", 
-    ## "1:00 PM", "2:00 PM", "3:00 PM", "4:00 PM", "5:00 PM", "6:00 PM", 
-    ## "7:00 PM", "8:00 PM")
-
-``` r
-hourlyIntensities_data$ActivityHour <- as.POSIXct(hourlyIntensities_data$ActivityHour, 
-                                                  format = "%I:%M %p")
-```
-
-#### Weight Log
+### Weight Log
 
 My third visualization is indicating a lack of data entry in weight log
 information. The number of users that logged weight information is very
@@ -592,23 +583,27 @@ ggplot(data = repeated_users, aes(x = id, y = times_used)) +
 
 I have decided to create summary statistics for users 5, 13, and 17 in
 order to analyze specifics of nightly sleep schedules. The users were
-chosen at random to avoid bias. filter sleep data for user 5
+chosen at random to avoid bias.
+
+filter sleep data for user_5
 
 ``` r
 sleepday_User5 <- select(filter(sleep_data,Id %in% c("1927972279")), c(Id, SleepDay, TotalSleepRecords, TotalMinutesAsleep, TotalTimeInBed, TotalHoursAsleep))
 ```
 
-user 13
+user_13
 
 ``` r
 sleepday_User13 <- filter(sleep_data, Id == 4020332650)
 ```
 
-user 17
+user_17
 
 ``` r
 sleepday_User17 <- filter(sleep_data, Id == 4445114986)
 ```
+
+summary statistics:
 
 ``` r
 summary(sleepday_User13$TotalHoursAsleep)
@@ -649,7 +644,7 @@ summary(sleepday_User5$TotalHoursAsleep)
     marketing strategy
 -   Is there additional data you could use to expand on your findings?
 
-#### Insights and Recommendations
+### Insights and Recommendations
 
 To influence sales and usage of the Bellabeat app the company will need
 to implement graphs of sleep, heart rate, intensity, and similar data

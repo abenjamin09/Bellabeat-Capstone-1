@@ -1,17 +1,16 @@
-# Google Data Analytics Professional Certificate
-### Capstone #1 - Bellabeat  
-#### 2022-05-29  
-#### Andrew Benjamin
+Google Data Analytics Professional Certificate
+================
+Andrew Benjamin
+2022-05-15
+
+true
 
 ``` r
 library(ggplot2)
 library(dplyr)
 library(tidyverse)
 ```
-<<<<<<< HEAD
 
-=======
->>>>>>> ec099f6d416a3c12296fb9d757b41e5335c7cbab
 # Introduction
 
 Welcome to the Bellabeat data analysis case study! In this case study,
@@ -245,7 +244,7 @@ glimpse(hourlyIntensities_data)
 
 ## Check for structural errors
 
-First issue I see is that columns SleepDay, Date, Time, and ActivityHour
+first issue I see is that columns SleepDay, Date, Time, and ActivityHour
 all have character format instead of datetime, I will change these
 values to the correct format. Beginning with weightLog_data.
 
@@ -253,29 +252,21 @@ values to the correct format. Beginning with weightLog_data.
 weightLog_data[['Date']] <- as.POSIXct(strptime(weightLog_data[['Date']], "%m/%d/%Y %H:%M"), format = "%Y/%m/%d %I:%M %p")
 ```
 
-I will then repeat these steps for sleep
+I will then repeat these steps for sleep_data, heartrate, and
+hourly_intensities
 
 ``` r
 sleep_data[["SleepDay"]] <- as.POSIXct(strptime(sleep_data[["SleepDay"]], "%m/%d/%Y %H:%M:%S %p"), format = "%Y/%m/%d %I:%M:%S %p")
 ```
-heart rate
+
 ``` r
 heartrate_data[["Time"]] <- as.POSIXct(strptime(heartrate_data[["Time"]],format="%m/%d/%Y %H:%M:%S %p"), format = "%Y/%m/%d %H:%M:%S %p")
 ```
-<<<<<<< HEAD
 
 ommited hourly_intensities and instead ran code below due to order of
 running code causing errors
 
 ## Check for irregularities
-=======
-hourly intensities
-``` r
-hourlyIntensities_data[["ActivityHour"]] <-  as.POSIXct(strptime(hourlyIntensities_data[["ActivityHour"]],format="%m/%d/%Y %H:%M:%S %p"), format = "%Y/%m/%d %H:%M:%S %p")
-```
-
-##  Check for irregularities
->>>>>>> ec099f6d416a3c12296fb9d757b41e5335c7cbab
 
 ``` r
 summary(sleep_data)
@@ -306,16 +297,16 @@ summary(sleep_data)
     ##  Max.   :46.00                       
     ##  NA's   :2
 
-First, I notice in TotalMinutesAsleep min value of less than an
-hour and max value higher than 13 hours. Secondly, total sleep records for
+First thing I notice in TotalMinutesAsleep is Min value of less than an
+hour and Max value higher than 13 hours. Also, total sleep records for
 some users is greater than 1. I will remove these instances. To remove
-these outliers from TotalMinutesAsleep and sleep records:
+these outliers from TotalMinutesAsleep and TotalTimeinBed
 
 ``` r
 sleep_data <- sleep_data[-c(which(sleep_data$TotalMinutesAsleep > 552 | sleep_data$TotalMinutesAsleep < 180 | sleep_data$TotalTimeInBed > 660)), ]
 ```
 
-Remove rows where users recorded sleep records more than once a day
+remove rows where users recorded sleep records more than once a day
 $TotalSleepRecords \> 1
 
 ``` r
@@ -323,13 +314,8 @@ sleep_data <- sleep_data[-c(which(sleep_data$TotalSleepRecords > 1.0)), ]
 ```
 
 ## Cleaning and Filtering
-<<<<<<< HEAD
-=======
 
-**Step 1: heartrate_data**
->>>>>>> ec099f6d416a3c12296fb9d757b41e5335c7cbab
-
-heartrate_data is a very large data set so I
+Step 1: **heartrate_data** heartrate_data is a very large data set so I
 filter ‘heartrate_data’ to contain data for user_6 only
 
 ``` r
@@ -386,13 +372,7 @@ sleep_datatwo <- sleep_datatwo %>%
     avg_hours_asleep = TotalHoursAsleep)
 ```
 
-<<<<<<< HEAD
 **Step 3: hourlyIntensities_data** filter hourlyIntensities_data for
-=======
-**Step 3: hourlyIntensities_data** 
-
-filter hourlyIntensities_data for
->>>>>>> ec099f6d416a3c12296fb9d757b41e5335c7cbab
 user_6 and 4/12/2016
 
 ``` r
@@ -419,7 +399,6 @@ axisorder <- c("7:00 AM", "8:00 AM", "9:00 AM", "10:00 AM", "11:00 AM", "12:00 A
                "3:00 PM","4:00 PM","5:00 PM","6:00 PM","7:00 PM","8:00 PM")
 ```
 
-<<<<<<< HEAD
 convert ActivityHour to posixct
 
 ``` r
@@ -430,8 +409,6 @@ hourlyIntensities_data$ActivityHour <- structure(c(1653782400, 1653786000, 16537
 1653865200), class = c("POSIXct", "POSIXt"), tzone = "")
 ```
 
-=======
->>>>>>> ec099f6d416a3c12296fb9d757b41e5335c7cbab
 **Step 4: Weight Log Data**
 
 find number of times each user used Weight Log
@@ -535,7 +512,7 @@ drop data from user 4 and user 18 due to unrealistic sleep times. 22 of
 My first analysis will be of sleepDay_merged data. I want to analyze
 normal amount of sleep per user from April to May of 2016.
 
-![sleep data](sleep_data_update2.jpg)
+![alt text](/cloud/project/sleep_data_update2.jpg)
 
 ``` r
 ggplot(data=sleep_datatwo, aes(x=User,y=avg_hours_asleep, group=1)) +
@@ -554,14 +531,8 @@ graphs look similar indicating a strong relationship. This relationship
 is reinforced by a correlation coefficient of **0.878** measured between
 heart rate and average intensity.
 
-<<<<<<< HEAD
 ![Heart Rate Plot](/cloud/project/heart%20rate%20plot_final.jpg) \###
 Heart Rate
-=======
-![Heart Rate Plot](heart_rate_plot_final.jpg) 
-
-### Heart Rate
->>>>>>> ec099f6d416a3c12296fb9d757b41e5335c7cbab
 
 ``` r
 heartrate_data %>%
@@ -575,11 +546,7 @@ heartrate_data %>%
           subtitle = "4-12-2016")
 ```
 
-<<<<<<< HEAD
 ![Average Intensity Plot](/cloud/project/ActivityHour_plot.png)
-=======
-![Average Intensity Plot](average_intensity_plot.jpg)
->>>>>>> ec099f6d416a3c12296fb9d757b41e5335c7cbab
 
 ### Average Intensity
 
@@ -602,7 +569,9 @@ I am assuming this has to do with weight scales not being available,
 lack of knowledge on how to measure BMI, or inconveniences in entering
 data.
 
-![Weight Log plot](file_show.jpg)
+![Weight Log plot](/cloud/project/file_show.jpg)
+
+plot
 
 ``` r
 ggplot(data = repeated_users, aes(x = id, y = times_used)) +
@@ -614,15 +583,10 @@ ggplot(data = repeated_users, aes(x = id, y = times_used)) +
 
 I have decided to create summary statistics for users 5, 13, and 17 in
 order to analyze specifics of nightly sleep schedules. The users were
-<<<<<<< HEAD
 chosen at random to avoid bias.
 
 filter sleep data for user_5
-=======
-chosen at random to avoid bias. 
->>>>>>> ec099f6d416a3c12296fb9d757b41e5335c7cbab
 
-filter sleep data for user_5
 ``` r
 sleepday_User5 <- select(filter(sleep_data,Id %in% c("1927972279")), c(Id, SleepDay, TotalSleepRecords, TotalMinutesAsleep, TotalTimeInBed, TotalHoursAsleep))
 ```
@@ -638,13 +602,9 @@ user_17
 ``` r
 sleepday_User17 <- filter(sleep_data, Id == 4445114986)
 ```
-<<<<<<< HEAD
 
 summary statistics:
 
-=======
-summary statistics:
->>>>>>> ec099f6d416a3c12296fb9d757b41e5335c7cbab
 ``` r
 summary(sleepday_User13$TotalHoursAsleep)
 ```

@@ -1,9 +1,8 @@
 Google Data Analytics Professional Certificate
 ================
-Andrew Benjamin
+Andrew Benjamin  
 2022-05-15
 
-true
 
 ``` r
 library(ggplot2)

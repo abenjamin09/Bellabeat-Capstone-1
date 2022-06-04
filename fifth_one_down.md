@@ -1,7 +1,7 @@
-Google Data Analytics Professional Certificate  
-Capstone #1 - Bellabeat
+# Google Data Analytics Professional Certificate  
+## Capstone #1 - Bellabeat
 Andrew Benjamin  
-2022-05-15
+June 4, 2022
 
 
 ``` r

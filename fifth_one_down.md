@@ -81,7 +81,7 @@ your presentation. These questions will guide your analysis:
     be able to pinpoint the usage of smart devices and focus on
     marketing those strengths to future Bellabeat customers.
 
-**Guiding questions**
+### Guiding questions
 
 -   What is the problem you are trying to solve? How can I use the
     trends in data from non Bellabeat smart devices to influence the
@@ -93,7 +93,7 @@ your presentation. These questions will guide your analysis:
     money within the product line (least used features of the product
     based on trends in smart device data.)
 
-#### Business Task
+### Business Task
 
 Bellabeat has hired a team of data analysts to analyze smart device
 usage data in order to gain insight into how consumers are using

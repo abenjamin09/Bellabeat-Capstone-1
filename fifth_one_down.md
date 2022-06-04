@@ -512,7 +512,7 @@ drop data from user 4 and user 18 due to unrealistic sleep times. 22 of
 My first analysis will be of sleepDay_merged data. I want to analyze
 normal amount of sleep per user from April to May of 2016.
 
-![alt text](/cloud/project/sleep_data_update2.jpg)
+![alt text](sleep_data_update2.jpg)
 
 ``` r
 ggplot(data=sleep_datatwo, aes(x=User,y=avg_hours_asleep, group=1)) +
@@ -531,7 +531,7 @@ graphs look similar indicating a strong relationship. This relationship
 is reinforced by a correlation coefficient of **0.878** measured between
 heart rate and average intensity.
 
-![Heart Rate Plot](/cloud/project/heart%20rate%20plot_final.jpg) \###
+![Heart Rate Plot](heart_rate_plot_final.jpg) \###
 Heart Rate
 
 ``` r
@@ -546,7 +546,7 @@ heartrate_data %>%
           subtitle = "4-12-2016")
 ```
 
-![Average Intensity Plot](/cloud/project/ActivityHour_plot.png)
+![Average Intensity Plot](ActivityHour_plot.png)
 
 ### Average Intensity
 
@@ -569,7 +569,7 @@ I am assuming this has to do with weight scales not being available,
 lack of knowledge on how to measure BMI, or inconveniences in entering
 data.
 
-![Weight Log plot](/cloud/project/file_show.jpg)
+![Weight Log plot](file_show.jpg)
 
 plot
 
